@@ -1,7 +1,7 @@
 # Projeto Informação salário servidores federais
 Trabalho da disciplina de Técnica de Programação
 
-Integrantes:
+Integrantes do grupo:
 * Cleber Schroeder Fonseca
 * Pablo Werlang
 
