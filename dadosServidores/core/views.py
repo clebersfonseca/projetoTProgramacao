@@ -2,13 +2,12 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from django.core import serializers
 import pandas as pd
 import os
 from dadosServidores import settings
 
-dt = pd.read_csv(os.path.join(settings.BASE_DIR, 'dados/20171231_Remuneracao.csv'), encoding='ISO-8859-1', delimiter="\t")
-dp = pd.read_csv(os.path.join(settings.BASE_DIR, 'dados/20171231_Cadastro.csv'), encoding='ISO-8859-1', delimiter="\t")
+dt = pd.read_csv(os.path.join(settings.BASE_DIR, 'dados/Remuneracao.csv'), encoding='ISO-8859-1', delimiter="\t")
+dp = pd.read_csv(os.path.join(settings.BASE_DIR, 'dados/Cadastro.csv'), encoding='ISO-8859-1', delimiter="\t")
 
 dt = dt.rename(columns={"REMUNERAÇÃO BÁSICA BRUTA (R$)":"bruta"})
 dt.bruta = dt.bruta.str.replace(',', '.')
