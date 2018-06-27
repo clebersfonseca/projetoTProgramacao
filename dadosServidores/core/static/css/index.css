@@ -1,0 +1,187 @@
+body {
+	margin: 0;
+	font-family: roboto, helvetica, arial, sans-serif;
+	font-size: 16px;
+}
+
+.background{
+	position: fixed;
+	filter: blur(5px) grayscale(100%);
+	bottom: 0;
+	right: 0;
+	left: 0;
+	top: 0;
+	z-index: -1;
+	background-size: cover;
+}
+
+#main-wrap {
+    width: 100vw;
+	height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#result-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	background-color: #00638d;
+	border-radius: 3px;
+	padding: 30px;
+}
+
+.frame #info {
+	color: white;
+	max-width: 100%;
+	width: 450px;
+	display: flex;
+}
+
+.frame #info img {
+	height: 100px;
+	margin-right: 20px;
+}
+
+.input {
+	border: 0;
+    outline: none;
+    border-bottom: 2px solid #1e86d8;
+	transition: 0.5s;
+	color: #ace8d3;
+    font-size: 1em;
+    font-family: roboto, helvetica, arial, sans-serif;
+	background-color: transparent;
+}
+.input:focus {
+    border-bottom: 2px solid #ace8d3;
+}
+
+.input::-webkit-input-placeholder {
+	color: #d8d8d8;
+}
+
+.frame .input {
+	width: 300px;
+	margin-bottom: 20px;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.button {
+    background-color: #1e86d8;
+    border: 0;
+    color: white;
+    border-radius: 3px;
+	font-size: 1.3rem;
+    font-family: roboto, helvetica, arial, sans-serif;
+	outline: none;
+	display: flex;
+	align-items: center;
+}
+
+.button:hover {
+	background-color: #45a5f0;
+}
+
+.button:disabled {
+	background-color: #8f98a3;
+	cursor: not-allowed;
+}
+
+.frame .button {
+	padding: 2px 20px;
+}
+
+.table {
+	margin-bottom: 30px;
+    box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
+	width: 100%;
+	background-color: rgba(255,255,255,0.05);
+}
+
+.table th {
+	color: #ace8d3;
+}
+
+.table tr {
+	line-height: 2.5em;
+	box-shadow: 0px 1px 0px rgba(0,0,0,0.2);
+}
+
+.table td {
+	text-align: center;
+	color: white;
+}
+
+.table .red {
+    color: rgb(255,90,90);
+}
+
+.table .green {
+	color: rgb(120,255,120);
+}
+
+#dados {
+	width: 300px;
+}
+
+#result-frame p {
+	width: 300px;
+	word-wrap: break-word;
+	margin: 0 0 30px;
+	color: white;
+}
+
+.share {
+	margin-top: 15px;
+}
+
+#result-frame .share p {
+	margin-bottom: 10px;
+	width: auto;
+	text-align: center;
+}
+
+.share #share-wrap {
+	display: flex;
+}
+
+.share .button {
+	padding-left: 6px;
+	background-color: transparent;
+	font-size: 1em;
+}
+
+.share .button:hover {
+	background-color: #1e86d8;
+}
+
+.share .button img {
+	height: 20px;
+	width: 20px;
+	margin-right: 10px;
+}
+
+#popup {
+    position: absolute;
+    background-color: white;
+	box-sizing: border-box;
+	box-shadow: 1px 1px 2px black;
+}
+
+#popup .item {
+    padding: 8px 15px;
+}
+#popup .item.selected {
+	background-color: #f0f0f0;
+	cursor: pointer;
+} 
