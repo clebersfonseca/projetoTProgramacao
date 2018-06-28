@@ -101,24 +101,12 @@ $(document).ready( function() {
 		$('#result-wrap').remove();
 		$('#main-wrap').show();
 	});
-
-	$(document).on("click", '#b-share-fb', function() {
-		var prof = $('#t-profissao').val();
-		var link = 'https://qstoes.tk/tecprog?c='+ prof +'%26s='+ mon;
-		window.open('https://www.facebook.com/sharer/sharer.php?u='+link, 'facebook-share-dialog', 'width=626,height=436');
-	});
-
-	$(document).on("click", '#b-share-tw', function() {
-		var prof = $('#t-profissao').val();
-		var link = 'https://qstoes.tk/tecprog?c='+ prof +'%26s='+ mon;
-		window.open('http://twitter.com/share?text=Veja o salário dos servidores públicos&url='+ link +'&hashtags=tranparencia,salario,governo');
-	});
-	
 });
 
 function buildTable(sal, json){
 	var data = json.data;
 	var i;
+	var info = json.info;
 	$('#main-wrap').hide();
 	
 	$('#main-wrap').after("<div id='result-wrap'><div id='result-frame' class='frame'><p>Veja os cargos que possuem salário semelhante ao seu:</p><div id='dados'><table class='table'><tbody><tr><th>Cargo</th><th>Salário</th><th>Diferença</th></tr></tbody></table></div><button id='b-reset' class='button'>Nova Busca</button><div class='share'><p>Compartilhar</p><div id='share-wrap'><button id='b-share-fb' class='button'><img src='static/img/facebook3.png'>Facebook</button><button id='b-share-tw' class='button'><img src='static/img/twitter.png'>Twitter</button></div></div></div>");
@@ -132,6 +120,22 @@ function buildTable(sal, json){
 			textSal = "<td class='green'> +"+ ((porcSal - 1)*100).toFixed(1) +"% </td>";
 		$('#result-frame #dados tbody').append("<tr><td>"+ data[i].cargo +"</td><td>R$ "+ data[i].salario.toFixed(2) +"</td>"+ textSal +"</tr>");
 	}
+
+	if (parseFloat(info.avg) != 0){
+		$('#dados').after("<p>Um "+ $('#t-profissao').val() +" no serviço público federal recebe em média R$ "+ info.avg.toFixed(2)+" de salário</p>");
+	}
+
+	$(document).on("click", '#b-share-fb', function() {
+		var prof = $('#t-profissao').val();
+		var link = 'https://qstoes.tk/tecprog?c='+ prof +'%26s='+ mon;
+		window.open('https://www.facebook.com/sharer/sharer.php?u='+link, 'facebook-share-dialog', 'width=626,height=436');
+	});
+
+	$(document).on("click", '#b-share-tw', function() {
+		var prof = $('#t-profissao').val();
+		var link = 'https://qstoes.tk/tecprog?c='+ prof +'%26s='+ mon;
+		window.open('http://twitter.com/share?text=Veja o salário dos servidores públicos&url='+ link +'&hashtags=tranparencia,salario,governo');
+	});
 }
 
 function create_popup(json) {

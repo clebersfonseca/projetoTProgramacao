@@ -16,7 +16,9 @@ dt.bruta = dt.bruta.astype(float)
 dp.drop_duplicates('Id_SERVIDOR_PORTAL', 'last')
 
 dados = dt.set_index('ID_SERVIDOR_PORTAL').join(dp.set_index('Id_SERVIDOR_PORTAL'), lsuffix='_sal', rsuffix='_serv')
-dados = dados.groupby(['DESCRICAO_CARGO']).mean().reset_index()
+dados = dados.groupby(['DESCRICAO_CARGO']).mean()
+dados = dados[dados.bruta != 0]
+dados = dados.sort_values(by=['bruta']).reset_index()
 
 desc = dados['DESCRICAO_CARGO'].values
 sal = dados['bruta'].values
@@ -34,42 +36,44 @@ def busca(request):
 
     s = request.POST.get('salario')
     s = float(s)
-    print(s)
     p = request.POST.get('profissao')
-    print(type(p))
     i = 0
     lista = {}
     count = 0
     while i < len(desc):
         if (s == "" or s == 0) and p != "":
-            if (desc[i] == p.upper()):
+            if (p.upper() in desc[i]):
                 lista[count] = {}
                 lista[count]["cargo"] = desc[i].lower()
                 lista[count]["salario"] = sal[i]
                 count += 1
-                print("Profissão")
         elif p == "" and (s != "" and s != 0):
             if ((sal[i] < (float(s) + 500)) and (sal[i] > (float(s) - 500))):
                 lista[count] = {}
                 lista[count]["cargo"] = desc[i].lower()
                 lista[count]["salario"] = sal[i]
                 count += 1
-                print("Salario")
         elif p != "" and s != "" and s != 0:
-            if (desc[i] == p.upper()) or ((sal[i] < (float(s) + 500)) and (sal[i] > (float(s) - 500))):
+            if (p.upper() in desc[i]) or ((sal[i] < (float(s) + 500)) and (sal[i] > (float(s) - 500))):
                 lista[count] = {}
                 lista[count]["cargo"] = desc[i].lower()
                 lista[count]["salario"] = sal[i]
                 count += 1
-                print("Os dois")
+
+        if p.upper() == desc[i]:
+            info = {"avg": sal[i]}
+        else:
+            info = {"avg": 0}
 
         if count == 10:
             break
         i += 1
 
-    re = {"data": lista, "length": count}
+    re = {"data": lista, "length": count, "info": info}
 
     re = json.dumps(re, sort_keys=False, separators=(',', ':'))
+
+    print(re)
 
     return JsonResponse(re, safe=False)
 
