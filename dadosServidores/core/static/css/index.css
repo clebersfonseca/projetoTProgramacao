@@ -120,6 +120,7 @@ body {
 .table td {
 	text-align: center;
 	color: white;
+	white-space: nowrap;
 }
 
 .table .red {
@@ -130,12 +131,8 @@ body {
 	color: rgb(120,255,120);
 }
 
-#dados {
-	width: 300px;
-}
 
 #result-frame p {
-	width: 300px;
 	word-wrap: break-word;
 	margin: 0 0 30px;
 	color: white;
